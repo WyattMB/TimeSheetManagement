@@ -17,15 +17,16 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import RedirectView
-from TimeSheet.views import HomeView, signup #, ProfileView, TimeSheetView, ReportView
+from TimeSheet.views import HomeView, signup_view, logout_view #, ProfileView, TimeSheetView, ReportView
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('registration/login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
-    path('registration/signup', signup, name='signup'),
+    path('registration/signup/', signup_view, name='signup'),
     path('', RedirectView.as_view(url='/registration/login/')),
+    path('logout/', logout_view, name='logout'),
     path('home/', HomeView.as_view(), name='home'),
-    # path('profile/', ProfileView.as_view(), name='profile'),
-    # path('timesheet/', TimeSheetView.as_view(), name='timesheet'),
-    # path('reports/', ReportView.as_view(), name='report'),
+    path('profile/', ProfileView.as_view(), name='profile'),
+    path('timesheet/', TimeSheetView.as_view(), name='timesheet'),
+    path('reports/', ReportView.as_view(), name='report'),
 ]

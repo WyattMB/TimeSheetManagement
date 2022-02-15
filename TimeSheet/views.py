@@ -5,15 +5,32 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-from TimeSheet.models import Profile
+from TimeSheet.models import Profile, WorkDay
 
 # Create your views here.
+
 
 class HomeView(TemplateView):
     model = Profile
     template_name = 'templates/home.html'
 
-def signup(request):
+
+class ProfileView(DetailView):
+    model = Profile
+    template_name = 'templates/account.html'
+
+
+class TimeSheetView(ListView):
+    model = WorkDay
+    template_name = 'templates/timesheet.html'
+
+
+class ReportView(ListView):
+    model = Profile
+    tempalte_name = 'templates/account.html'
+
+
+def signup_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -25,3 +42,8 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')

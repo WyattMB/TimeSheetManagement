@@ -11,6 +11,7 @@ class Profile(models.Model):
     deleted_date = models.DateField(null=True)
     deleted_by = models.CharField(null=True, max_length=30)
 
+
 class WorkDay(models.Model):
     workdate = models.DateField()
     location = models.CharField(max_length=30)
@@ -26,11 +27,3 @@ class WorkDay(models.Model):
     ]
     batch_ID = models.CharField(max_length=100)
     company_code = models.CharField(max_length=100)
-
-class SignupForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ['username', 'first_name', 'title', 'image', 'password']
-        widgets = {
-            'password': forms.PasswordInput
-        }

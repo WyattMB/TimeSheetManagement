@@ -55,10 +55,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'TimeSheetManagement.urls'
 
+# SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
+# os.path.join(SETTINGS_PATH, 'templates')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,10 +127,10 @@ STATIC_URL = 'static/'
 LOGIN_REDIRECT_URL= 'home'
 LOGIN_URL = 'registration/login/'
 
-ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
-TEMPLATE_DIRS = (
-    os.path.join(ROOT_DIR, 'templates'),
-)
+# ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+# TEMPLATE_DIRS = (
+#     os.path.join(ROOT_DIR, 'templates'),
+# )
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
