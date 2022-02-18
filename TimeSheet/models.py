@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=30)
-    image = models.ImageField(upload_to='media')
+    image = models.ImageField(upload_to='images/')
     deleted_date = models.DateField(null=True)
     deleted_by = models.CharField(null=True, max_length=30)
 

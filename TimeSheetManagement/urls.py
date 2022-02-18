@@ -13,17 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, re_path, include
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import RedirectView
-from TimeSheet.views import HomeView, Signup, logout_view #, ProfileView, TimeSheetView#, ReportView
+from TimeSheet.views import HomeView, logout_view, signup_view #, ProfileView, TimeSheetView#, ReportView
+from TimeSheetManagement import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('registration/login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
-    path('registration/signup/', Signup.as_view(), name='signup'),
+    path('registration/signup/', signup_view, name='signup'),
     path('', RedirectView.as_view(url='/registration/login/')),
     path('logout/', logout_view, name='logout'),
     path('home/', HomeView.as_view(), name='home'),
@@ -31,3 +32,7 @@ urlpatterns = [
     # path('timesheet/', TimeSheetView.as_view(), name='timesheet'),
     # path('reports/', ReportView.as_view(), name='report'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

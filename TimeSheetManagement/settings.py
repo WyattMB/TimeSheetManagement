@@ -126,6 +126,8 @@ USE_TZ = True
 STATIC_URL = 'static/'
 LOGIN_REDIRECT_URL= 'home'
 LOGIN_URL = 'registration/login/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 # TEMPLATE_DIRS = (

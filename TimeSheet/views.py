@@ -1,3 +1,4 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, CreateView, ListView, TemplateView
@@ -6,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from TimeSheet.models import Profile, WorkDay
+from TimeSheet.forms import NewUserForm, NewProfileForm
 
 # Create your views here.
 
@@ -30,24 +32,36 @@ class HomeView(TemplateView):
 #     tempalte_name = 'templates/account.html'
 
 
-class Signup(CreateView):
-    form_class = UserCreationForm
-    success_url = reverse_lazy('login')
+def signup_view(request):
+
     template_name = 'registration/signup.html'
+    context = {}
+
+    if request.method == 'POST':
+        user_form = NewUserForm(request.POST)
+        profile_form = NewProfileForm(request.POST, request.FILES)
+
+        if all((user_form.is_valid(), profile_form.is_valid())):
+            user = user_form.save(commit=False)
+            user.save()
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
+            return HttpResponseRedirect(reverse_lazy('login'))
+        else:
+            user_form = NewUserForm()
+            profile_form = NewProfileForm()
+    else:
+        user_form = NewUserForm()
+        profile_form = NewProfileForm()
 
 
-# def signup_view(request):
-#     if request.method == 'POST':
-#         form = UserCreationForm(request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data.get('username')
-#             raw_password = form.cleaned_data.get('password1')
-#             user = authenticate(username=username, password=raw_password)
-#             login(request, user)
-#             return redirect('home')
-#     else:
-#         form = UserCreationForm()
-#     return render(request, 'signup.html', {'form': form})
+    context.update({
+        'user_form': user_form,
+        'profile_form': profile_form,
+    })
+
+    return render(request, template_name, context)
 
 
 def logout_view(request):

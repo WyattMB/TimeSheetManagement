@@ -11,8 +11,9 @@
             {% if user.is_authenticated %}
                 <p>User: {{ user.username }} | <a href="{% url 'logout' %}">logout</a></p>
                 <p>Title: {{ user.Profile.title }}</p>
-            {% elif user.is_superuser %}
-                <p>Welcome, administrator.</p>
+                {% if user.is_superuser %}
+                    <p>Welcome, administrator.</p>
+                {% endif %}
             {% else %}
                 <p><a href="{% url 'login' %}?next={{request.path}}">login</a></p>
             {% endif %}
@@ -37,7 +38,7 @@
         {% block footer %}This website is powered by Django*{% endblock %}
     </div>
 {% else %}
-<p><a href="{% url 'login' %}?next={{request.path}}">login</a></p>
+<p><a href="{% url 'login' %}?next={{request.path}}">You must login...</a></p>
 {% endif %}
 </body>
 </html>
