@@ -22,7 +22,7 @@
     <div id="sidebar">
         {% block sidebar %}
             <ul><li><a href="{% url 'home' %}">Home</a></li></ul>
-            <ul><li><a href="{% url 'home' %}">Profile</a></li></ul>
+            <ul><li><a href="{% url 'profile' pk=user.profile.id %}">Profile</a></li></ul>
             <ul><li><a href="{% url 'home' %}">Time Sheet</a></li></ul>
             {% if user.is_superuser %}
                 <ul><li><a href="{% url 'home' %}">Reports</a></li></ul>

@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Account{% endblock %}
 
 {% block content %}
     <p>Hello {{ object.user.username }}</p>
     <p>Title: {{ user.profile.title }}</p>
+    <p>ID:</p>
+    <img src=" {{ MEDIA_URL }}{{ user.profile.image.url }} ">
 {% endblock %}

@@ -17,19 +17,19 @@ class HomeView(TemplateView):
     template_name = 'templates/home.html'
 
 
-# class ProfileView(DetailView):
-#     model = Profile
-#     template_name = 'templates/account.html'
-#
-#
-# class TimeSheetView(ListView):
-#     model = WorkDay
-#     template_name = 'templates/timesheet.html'
-#
-#
-# class ReportView(ListView):
-#     model = Profile
-#     tempalte_name = 'templates/account.html'
+class ProfileView(DetailView):
+    model = Profile
+    template_name = 'templates/account.html'
+
+
+class TimeSheetView(ListView):
+    model = WorkDay
+    template_name = 'templates/timesheet.html'
+
+
+class ReportView(ListView):
+    model = Profile
+    tempalte_name = 'templates/reports.html'
 
 
 def signup_view(request):
