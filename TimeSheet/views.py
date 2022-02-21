@@ -37,17 +37,29 @@ def time_sheet_view(request):
     return render(request, template_name, context)
 
 
-# class TimeSheetView(TemplateView):
-#     model = WorkDay
-#     template_name = 'templates/timesheet.html'
-#     pk = request.user.user_id
-#     query_results = WorkDay.objects.get(profile_id=)
-#     context = {}
+def delete_view(request, id):
+
+    template_name = 'templates/home.html'
+    workday_id = id
+    context = {}
+
+    if workday_id:
+        print('Deleting: ', workday_id, '...')
+        WorkDay.objects.filter(id=workday_id).delete()
+        print('Deleted')
+    else:
+        print('not anywhere')
+
+    context.update({
+        'workday_id': workday_id,
+    })
+
+    return render(request, template_name, context)
 
 
 class ReportView(ListView):
     model = Profile
-    tempalte_name = 'templates/reports.html'
+    template_name = 'templates/reports.html'
 
 
 class WorkDayView(CreateView):

@@ -12,6 +12,7 @@
             <th>|     Total Hours</th>
             <th>|     Payroll Type</th>
             <th>|     Sector</th>
+            <th>|     Delete</th>
         </tr>
         {% for item in query_results %}
         <tr>
@@ -21,6 +22,7 @@
             <td>|     Total</td>
             <td>|     {{ item.billing }}</td>
             <td>|     {{ item.sector }}</td>
+            <td><button type="button"><a href="{% url 'delete' id=item.id %}">(X)</a></button></td>
         </tr>
         {% endfor %}
     </table>

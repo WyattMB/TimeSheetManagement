@@ -18,20 +18,21 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import RedirectView
-from TimeSheet.views import HomeView, logout_view, signup_view, time_sheet_view, WorkDayView, ProfileView, ReportView
+from TimeSheet.views import signup_view, logout_view, HomeView, ProfileView, WorkDayView, time_sheet_view, ReportView, delete_view
 from TimeSheetManagement import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
+    path('', RedirectView.as_view(url='/registration/login/')),
     path('registration/login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     path('registration/signup/', signup_view, name='signup'),
-    path('', RedirectView.as_view(url='/registration/login/')),
     path('logout/', logout_view, name='logout'),
     path('home/', HomeView.as_view(), name='home'),
     path('profile/<int:pk>', ProfileView.as_view(), name='profile'),
     path('workday/', WorkDayView.as_view(), name='workday'),
     path('timesheet/', time_sheet_view, name='timesheet'),
     path('reports/', ReportView.as_view(), name='report'),
+    path('delete/<int:id>', delete_view, name='delete')
 ]
 
 if settings.DEBUG:
