@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}Reports{% endblock %}
+
+{% block content %}
+    <p>Hello {{ object.user.username }}</p>
+    <p>Title: {{ user.profile.title }}</p>
+{% endblock %}

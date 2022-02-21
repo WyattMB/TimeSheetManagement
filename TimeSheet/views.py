@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from TimeSheet.models import Profile, WorkDay
-from TimeSheet.forms import NewUserForm, NewProfileForm
+from TimeSheet.forms import NewUserForm, NewProfileForm, NewWorkDayForm
 
 # Create your views here.
 
@@ -30,6 +30,35 @@ class TimeSheetView(ListView):
 class ReportView(ListView):
     model = Profile
     tempalte_name = 'templates/reports.html'
+
+
+class WorkDayView(CreateView):
+    model = WorkDay
+    form_class = NewWorkDayForm
+    template_name = 'templates/timesheet.html'
+    success_url = 'home'
+
+
+# def new_workday_view(request):
+#
+#     template_name = 'templates/timesheet.html'
+#     context = {}
+#
+#
+#     if request.method == 'POST':
+#         workday_form = NewWorkDayForm(request.POST)
+#
+#         if workday_form.is_valid():
+#             workday_form.save()
+#             return HttpResponseRedirect(reverse_lazy('home'))
+#         else:
+#             workday_form = NewWorkDayForm()
+#     else:
+#         workday_form = NewWorkDayForm()
+#
+#     context.update({'workday_form':workday_form})
+#
+#     return render(request, template_name, context)
 
 
 def signup_view(request):

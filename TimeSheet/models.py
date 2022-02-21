@@ -14,16 +14,23 @@ class Profile(models.Model):
 
 class WorkDay(models.Model):
     workdate = models.DateField()
-    location = models.CharField(max_length=30)
+    location = models.Field()
     sector = models.CharField(max_length=30)
+    east = 'East'
+    west = 'West'
+    sector_choices = (
+        (east, 'East Sector'),
+        (west, 'West Sector'),
+    )
     time_in = models.DateTimeField()
     time_out = models.DateTimeField()
-    report_date = models.DateField()
+    report_date = models.DateField(auto_now_add=True)
+    billing = models.Field()
     FBP_billing = 'FBP'
     AMCO_billing = 'AMCO'
-    billing_choices = [
+    billing_choices = (
         (FBP_billing, 'FBP Billing'),
         (AMCO_billing, 'AMCO Billing'),
-    ]
+    )
     batch_ID = models.CharField(max_length=100)
     company_code = models.CharField(max_length=100)

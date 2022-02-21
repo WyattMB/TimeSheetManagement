@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, re_path, include
 from django.contrib.auth import views as auth_views
 from django.views.generic.base import RedirectView
-from TimeSheet.views import HomeView, logout_view, signup_view, ProfileView, TimeSheetView, ReportView
+from TimeSheet.views import HomeView, logout_view, signup_view, WorkDayView, ProfileView, ReportView
 from TimeSheetManagement import settings
 
 urlpatterns = [
@@ -29,7 +29,7 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('home/', HomeView.as_view(), name='home'),
     path('profile/<int:pk>', ProfileView.as_view(), name='profile'),
-    path('timesheet/', TimeSheetView.as_view(), name='timesheet'),
+    path('timesheet/', WorkDayView.as_view(), name='timesheet'),
     path('reports/', ReportView.as_view(), name='report'),
 ]
 
