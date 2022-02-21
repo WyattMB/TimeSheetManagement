@@ -10,7 +10,7 @@
         {% block header %}
             {% if user.is_authenticated %}
                 <p>User: {{ user.username }} | <a href="{% url 'logout' %}">logout</a></p>
-                <p>Title: {{ user.Profile.title }}</p>
+                <p>Title: {{ user.profile.title }}</p>
                 {% if user.is_superuser %}
                     <p>Welcome, administrator.</p>
                 {% endif %}

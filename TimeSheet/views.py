@@ -36,7 +36,11 @@ class WorkDayView(CreateView):
     model = WorkDay
     form_class = NewWorkDayForm
     template_name = 'templates/timesheet.html'
-    success_url = 'home'
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        form.instance.profile = self.request.user
+        return super(WorkDayView, self).form_valid(form)
 
 
 # def new_workday_view(request):
