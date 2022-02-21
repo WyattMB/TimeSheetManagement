@@ -22,9 +22,27 @@ class ProfileView(DetailView):
     template_name = 'templates/account.html'
 
 
-class TimeSheetView(ListView):
-    model = WorkDay
+def time_sheet_view(request):
+
     template_name = 'templates/timesheet.html'
+    context = {}
+
+    fk = request.user.id
+    query_results = WorkDay.objects.filter(profile_id=fk)
+
+    context.update({
+        'query_results': query_results,
+    })
+
+    return render(request, template_name, context)
+
+
+# class TimeSheetView(TemplateView):
+#     model = WorkDay
+#     template_name = 'templates/timesheet.html'
+#     pk = request.user.user_id
+#     query_results = WorkDay.objects.get(profile_id=)
+#     context = {}
 
 
 class ReportView(ListView):
@@ -35,34 +53,12 @@ class ReportView(ListView):
 class WorkDayView(CreateView):
     model = WorkDay
     form_class = NewWorkDayForm
-    template_name = 'templates/timesheet.html'
+    template_name = 'templates/workday.html'
     success_url = reverse_lazy('home')
 
     def form_valid(self, form):
         form.instance.profile = self.request.user
         return super(WorkDayView, self).form_valid(form)
-
-
-# def new_workday_view(request):
-#
-#     template_name = 'templates/timesheet.html'
-#     context = {}
-#
-#
-#     if request.method == 'POST':
-#         workday_form = NewWorkDayForm(request.POST)
-#
-#         if workday_form.is_valid():
-#             workday_form.save()
-#             return HttpResponseRedirect(reverse_lazy('home'))
-#         else:
-#             workday_form = NewWorkDayForm()
-#     else:
-#         workday_form = NewWorkDayForm()
-#
-#     context.update({'workday_form':workday_form})
-#
-#     return render(request, template_name, context)
 
 
 def signup_view(request):

@@ -26,8 +26,8 @@ class WorkDay(models.Model):
 
     def save(self, *args, **kwargs):
 
-        east_hospitals = ('h1', 'h2', 'h3')
-        west_hospitals = ('h4', 'h5')
+        east_hospitals = ('Hospital One', 'Hospital Two', 'Hospital Three')
+        west_hospitals = ('Hospital Four', 'Hospital Five')
         if self.location in east_hospitals:
             self.sector = 'East'
         elif self.location in west_hospitals:

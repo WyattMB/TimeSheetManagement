@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Work Day{% endblock %}
+
+{% block content %}
+    <p>Hello {{ object.user.username }}</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create Workday</button>
+    </form>
+{% endblock %}
